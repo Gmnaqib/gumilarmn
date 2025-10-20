@@ -1,7 +1,6 @@
 <?php
 
-$string['pluginname'] = 'Gumilar Block';
-$string['hello'] = 'Hello World';
+$string['pluginname'] = 'Annotation';
 $string['welcome_message'] = 'Selamat datang di Block Gumilar!';
 $string['gumilar:addinstance'] = 'Add a new Gumilar block';
 $string['gumilar:myaddinstance'] = 'Add a new Gumilar block to Dashboard';

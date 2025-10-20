@@ -17,7 +17,6 @@ class block_gumilar extends block_base
         }
 
         $this->content = new stdClass;
-        $this->content->text = '<h3>' . get_string('hello', 'block_gumilar') . '</h3>';
         $this->content->text .= '<p>' . get_string('welcome_message', 'block_gumilar') . '</p>';
         $this->content->footer = '';
 

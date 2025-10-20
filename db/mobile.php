@@ -15,7 +15,6 @@ $addons = [
             ],
         ],
         'lang' => [
-            ['hello', 'block_gumilar'],
             ['welcome_message', 'block_gumilar'],
             ['pluginname', 'block_gumilar'],
         ],

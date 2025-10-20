@@ -17,7 +17,6 @@ class mobile
                     'id' => 'main',
                     'html' => '
                         <div class="block-gumilar">
-                            <h3>{{ "plugin.block_gumilar.hello" | translate }}</h3>
                             <p>{{ "plugin.block_gumilar.welcome_message" | translate }}</p>
                         </div>
                     ',

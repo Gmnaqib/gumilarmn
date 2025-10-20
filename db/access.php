@@ -9,7 +9,9 @@ $capabilities = array(
         'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
+            'manager' => CAP_ALLOW,
+            'admin' => CAP_ALLOW,
+            'user' => CAP_ALLOW
         ),
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
