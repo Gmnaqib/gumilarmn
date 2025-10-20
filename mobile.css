@@ -1,0 +1,28 @@
+/* Styles untuk Block Gumilar di Moodle Mobile App */
+
+.block_gumilar {
+  margin: 10px;
+}
+
+.block_gumilar ion-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.block_gumilar ion-card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.block_gumilar ion-card-content p {
+  margin: 8px 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.block_gumilar ion-card-content strong {
+  color: #ffe082;
+}
