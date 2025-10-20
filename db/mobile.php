@@ -9,12 +9,9 @@ $addons = [
                 'delegate' => 'CoreBlockDelegate',
                 'method' => 'view_gumilar',
                 'displaydata' => [
-                    'title' => 'gumilar',
-                    'icon' => 'fas-home', // Icon untuk dashboard
-                    'class' => 'block_gumilar',
+                    'title' => 'Gumilar Block',
+                    'icon' => 'home',
                 ],
-                'priority' => 100,
-                'fallback' => true, // Support fallback untuk web view
             ],
         ],
         'lang' => [
@@ -22,11 +19,5 @@ $addons = [
             ['welcome_message', 'block_gumilar'],
             ['pluginname', 'block_gumilar'],
         ],
-        'styles' => [
-            [
-                'url' => 'mobile.css',
-                'version' => '1.0'
-            ]
-        ]
     ],
 ];

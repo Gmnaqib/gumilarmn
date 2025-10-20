@@ -28,15 +28,14 @@ class block_gumilar extends block_base
     public function applicable_formats()
     {
         return array(
-            'all' => true,
+            'all' => false,
             'site' => true,
             'site-index' => true,
             'course-view' => true,
             'course-view-social' => false,
             'mod' => false,
             'mod-quiz' => false,
-            'my' => true,
-            'user-profile' => true
+            'my' => true
         );
     }
 
@@ -50,25 +49,5 @@ class block_gumilar extends block_base
     public function has_config()
     {
         return false;
-    }
-
-    // Support untuk mobile app
-    public function get_content_for_external()
-    {
-        if (!isset($this->content)) {
-            $this->get_content();
-        }
-
-        return [
-            'text' => $this->content->text,
-            'footer' => $this->content->footer,
-            'files' => []
-        ];
-    }
-
-    // Memastikan block dapat ditampilkan di dashboard
-    public function instance_can_be_docked()
-    {
-        return true;
     }
 }
