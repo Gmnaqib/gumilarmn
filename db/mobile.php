@@ -13,14 +13,6 @@ $addons = [
                     'icon' => 'home',
                 ],
             ],
-            'gumilarlist' => [
-                'delegate' => 'CoreContentLinksDelegate',
-                'method' => 'view_gumilar_list',
-                'displaydata' => [
-                    'title' => 'Gumilar Data List',
-                    'icon' => 'list',
-                ],
-            ],
         ],
         'lang' => [
             ['welcome_message', 'block_gumilar'],

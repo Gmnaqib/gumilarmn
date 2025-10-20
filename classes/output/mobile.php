@@ -11,34 +11,7 @@ class mobile
      */
     public static function view_gumilar()
     {
-        return [
-            'templates' => [
-                [
-                    'id' => 'main',
-                    'html' => '
-                        <div class="block-gumilar" style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin: 10px; text-align: center;">
-                            <h4 style="margin: 0 0 10px 0; color: #333;">{{ "plugin.block_gumilar.pluginname" | translate }}</h4>
-                            <p style="margin: 0 0 15px 0;">{{ "plugin.block_gumilar.welcome_message" | translate }}</p>
-                            <core-site-plugins-new-content 
-                                component="block_gumilar" 
-                                method="view_gumilar_list"
-                                class="btn btn-primary"
-                                style="width: 100%; padding: 10px; background: #007cba; color: white; border: none; border-radius: 4px; cursor: pointer; display: inline-block; text-decoration: none;">
-                                {{ "plugin.block_gumilar.view_data" | translate }}
-                            </core-site-plugins-new-content>
-                        </div>
-                    ',
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * Render halaman data list untuk Moodle Mobile App
-     */
-    public static function view_gumilar_list()
-    {
-        // Generate 10 dummy data items
+        // Generate 10 dummy data items for display within the block
         $dummyData = [];
         for ($i = 1; $i <= 10; $i++) {
             $dummyData[] = [
@@ -55,36 +28,54 @@ class mobile
                 [
                     'id' => 'main',
                     'html' => '
-                        <ion-header>
-                            <ion-toolbar>
-                                <ion-buttons slot="start">
-                                    <ion-back-button></ion-back-button>
-                                </ion-buttons>
-                                <ion-title>{{ "plugin.block_gumilar.data_list" | translate }}</ion-title>
-                            </ion-toolbar>
-                        </ion-header>
-
-                        <ion-content class="ion-padding">
-                            <div class="data-list">
+                        <div class="block-gumilar" style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin: 10px;">
+                            <h4 style="margin: 0 0 10px 0; color: #333; text-align: center;">{{ "plugin.block_gumilar.pluginname" | translate }}</h4>
+                            <p style="margin: 0 0 15px 0; text-align: center;">{{ "plugin.block_gumilar.welcome_message" | translate }}</p>
+                            
+                            <button id="showDataBtn" 
+                                    style="width: 100%; padding: 10px; background: #007cba; color: white; border: none; border-radius: 4px; margin-bottom: 15px; cursor: pointer;">
+                                {{ "plugin.block_gumilar.view_data" | translate }}
+                            </button>
+                            
+                            <div id="dataListContainer" style="display: none;">
+                                <h5 style="margin: 0 0 10px 0; color: #333;">{{ "plugin.block_gumilar.data_list" | translate }}</h5>
                                 {{#dummyData}}
-                                <ion-card style="margin-bottom: 15px;">
-                                    <ion-card-header>
-                                        <ion-card-title style="font-size: 1.1em; color: #333;">{{title}}</ion-card-title>
-                                        <ion-card-subtitle style="color: #666;">ID: {{id}} | {{date}} | Status: {{status}}</ion-card-subtitle>
-                                    </ion-card-header>
-                                    <ion-card-content>
-                                        <p style="margin: 0; line-height: 1.4;">{{description}}</p>
-                                    </ion-card-content>
-                                </ion-card>
+                                <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 6px; padding: 12px; margin-bottom: 10px;">
+                                    <div style="font-weight: bold; color: #333; margin-bottom: 5px;">{{title}}</div>
+                                    <div style="font-size: 0.85em; color: #666; margin-bottom: 8px;">ID: {{id}} | {{date}} | Status: {{status}}</div>
+                                    <div style="font-size: 0.9em; line-height: 1.4; color: #555;">{{description}}</div>
+                                </div>
                                 {{/dummyData}}
+                                <button id="hideDataBtn" 
+                                        style="width: 100%; padding: 8px; background: #6c757d; color: white; border: none; border-radius: 4px; margin-top: 10px;">
+                                    {{ "plugin.block_gumilar.back_to_main" | translate }}
+                                </button>
                             </div>
-                        </ion-content>
+                        </div>
                     ',
                 ],
             ],
+            'javascript' => '
+                document.addEventListener("DOMContentLoaded", function() {
+                    const showBtn = document.getElementById("showDataBtn");
+                    const hideBtn = document.getElementById("hideDataBtn");
+                    const dataContainer = document.getElementById("dataListContainer");
+                    
+                    if (showBtn && hideBtn && dataContainer) {
+                        showBtn.addEventListener("click", function() {
+                            showBtn.style.display = "none";
+                            dataContainer.style.display = "block";
+                        });
+                        
+                        hideBtn.addEventListener("click", function() {
+                            dataContainer.style.display = "none";
+                            showBtn.style.display = "block";
+                        });
+                    }
+                });
+            ',
             'otherdata' => [
                 'dummyData' => $dummyData,
             ],
         ];
-    }
 }
