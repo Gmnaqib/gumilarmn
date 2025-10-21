@@ -12,7 +12,8 @@ $string['dashboard_info'] = 'This block is optimized for dashboard and mobile ap
 
 // Navigation and data list strings
 $string['view_data'] = 'Lihat Data';
-$string['data_list'] = 'Daftar Data Gumilar';
+$string['data_list'] = 'Data Gumilar';
 $string['item_title'] = 'Judul Item';
 $string['item_description'] = 'Deskripsi Item';
-$string['back_to_main'] = 'Kembali ke Menu Utama';
+$string['back_to_main'] = 'Kembali';
+$string['no_data'] = 'Tidak ada data';

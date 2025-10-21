@@ -13,6 +13,14 @@ $addons = [
                     'icon' => 'home',
                 ],
             ],
+            'gumilardata' => [
+                'delegate' => 'CoreMainMenuDelegate',
+                'method' => 'view_gumilar_data',
+                'displaydata' => [
+                    'title' => 'Data Gumilar',
+                    'icon' => 'list',
+                ],
+            ],
         ],
         'lang' => [
             ['welcome_message', 'block_gumilar'],
@@ -22,6 +30,7 @@ $addons = [
             ['item_title', 'block_gumilar'],
             ['item_description', 'block_gumilar'],
             ['back_to_main', 'block_gumilar'],
+            ['no_data', 'block_gumilar'],
         ],
     ],
 ];
