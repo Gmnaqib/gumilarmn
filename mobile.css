@@ -1,25 +1,134 @@
-.block_gumilar ion-card {
-  margin: 10px;
-  border-radius: 8px;
+/* Main container */
+.gumilar-container {
+  padding: 0;
+  margin: 0;
 }
 
-.block_gumilar ion-card-title {
-  color: #2dd36f;
-  font-weight: bold;
+/* Main card (clickable header) */
+.gumilar-main-card {
+  margin: 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.block_gumilar ion-item {
-  --border-color: #e9ecef;
+.gumilar-main-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.block_gumilar ion-label h2 {
-  color: #495057;
-  font-size: 1.1em;
+/* Header layout (like course cards) */
+.gumilar-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.gumilar-icon {
+  margin-right: 16px;
+  font-size: 24px;
+}
+
+.gumilar-info {
+  flex: 1;
+}
+
+.gumilar-info h2 {
+  margin: 0 0 4px 0;
+  font-size: 18px;
   font-weight: 600;
+  color: #1976d2;
 }
 
-.block_gumilar ion-label p {
-  color: #6c757d;
-  font-size: 0.9em;
-  margin-top: 4px;
+.gumilar-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.gumilar-action {
+  margin-left: auto;
+}
+
+/* Data list container */
+.data-list-container {
+  animation: slideDown 0.3s ease-out;
+  padding: 0 8px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Individual data item cards */
+.data-item-card {
+  margin: 8px 0;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #1976d2;
+}
+
+.data-item-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.data-item-icon {
+  margin-right: 12px;
+  font-size: 20px;
+}
+
+.data-item-info {
+  flex: 1;
+}
+
+.data-item-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.data-item-info p {
+  margin: 2px 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.data-meta {
+  font-size: 12px !important;
+  color: #999 !important;
+  font-style: italic;
+}
+
+.data-item-status {
+  margin-left: auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .gumilar-main-card {
+    margin: 4px;
+  }
+
+  .data-item-card {
+    margin: 4px 0;
+  }
+
+  .gumilar-info h2 {
+    font-size: 16px;
+  }
+
+  .data-item-info h3 {
+    font-size: 15px;
+  }
 }
