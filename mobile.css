@@ -1,0 +1,25 @@
+.block_gumilar ion-card {
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.block_gumilar ion-card-title {
+  color: #2dd36f;
+  font-weight: bold;
+}
+
+.block_gumilar ion-item {
+  --border-color: #e9ecef;
+}
+
+.block_gumilar ion-label h2 {
+  color: #495057;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.block_gumilar ion-label p {
+  color: #6c757d;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
