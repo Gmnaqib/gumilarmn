@@ -1,0 +1,22 @@
+.block_gumilar .gumilar-datalist {
+  margin: 10px 0;
+}
+
+.block_gumilar .gumilar-item {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  margin: 5px 0;
+  padding: 10px;
+}
+
+.block_gumilar .gumilar-item strong {
+  color: #495057;
+  font-weight: bold;
+}
+
+.block_gumilar .gumilar-item p {
+  margin: 5px 0 0 0;
+  color: #6c757d;
+  font-size: 0.9em;
+}
