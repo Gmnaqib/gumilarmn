@@ -12,8 +12,8 @@ class mobile
         // Main container with toggle functionality
         $html = '<div class="gumilar-container">';
 
-        // Header with toggle button (like course cards)
-        $html .= '<ion-card class="gumilar-main-card" (click)="toggleDataList()">';
+        // Header with toggle button (using onclick instead of Angular syntax)
+        $html .= '<ion-card class="gumilar-main-card" onclick="toggleGumilarData()">';
         $html .= '<ion-card-content>';
         $html .= '<div class="gumilar-header">';
         $html .= '<div class="gumilar-icon">';
@@ -25,15 +25,15 @@ class mobile
         $html .= '</div>';
         $html .= '<div class="gumilar-action">';
         $html .= '<ion-button fill="clear" size="small" color="primary">';
-        $html .= '<ion-icon name="chevron-forward-outline"></ion-icon>';
+        $html .= '<ion-icon id="gumilarToggleIcon" name="chevron-forward-outline"></ion-icon>';
         $html .= '</ion-button>';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</ion-card-content>';
         $html .= '</ion-card>';
 
-        // Hidden data list (similar to course list format)
-        $html .= '<div id="dataListContainer" class="data-list-container" style="display: none;">';
+        // Data list container (initially hidden)
+        $html .= '<div id="gumilarDataContainer" class="data-list-container" style="display: none; opacity: 0; transition: all 0.3s ease;">';
 
         for ($i = 1; $i <= 10; $i++) {
             $statusColor = ($i % 2 == 0) ? 'success' : 'warning';
@@ -61,31 +61,56 @@ class mobile
         $html .= '</div>';
         $html .= '</div>';
 
+        // Improved JavaScript with better mobile compatibility
         $javascript = '
-        var dataListVisible = false;
+        window.gumilarDataVisible = false;
         
-        function toggleDataList() {
-            var container = document.getElementById("dataListContainer");
-            var button = document.querySelector(".gumilar-action ion-button ion-icon");
+        function toggleGumilarData() {
+            console.log("Toggle function called"); // Debug log
             
-            if (dataListVisible) {
-                container.style.display = "none";
-                button.setAttribute("name", "chevron-forward-outline");
-                dataListVisible = false;
+            var container = document.getElementById("gumilarDataContainer");
+            var icon = document.getElementById("gumilarToggleIcon");
+            
+            if (!container || !icon) {
+                console.log("Elements not found"); // Debug log
+                return;
+            }
+            
+            if (window.gumilarDataVisible) {
+                // Hide data
+                container.style.opacity = "0";
+                setTimeout(function() {
+                    container.style.display = "none";
+                }, 300);
+                icon.setAttribute("name", "chevron-forward-outline");
+                window.gumilarDataVisible = false;
+                console.log("Data hidden"); // Debug log
             } else {
+                // Show data
                 container.style.display = "block";
-                button.setAttribute("name", "chevron-down-outline");
-                dataListVisible = true;
+                setTimeout(function() {
+                    container.style.opacity = "1";
+                }, 50);
+                icon.setAttribute("name", "chevron-down-outline");
+                window.gumilarDataVisible = true;
+                console.log("Data shown"); // Debug log
             }
         }
         
-        // Add click event listener
-        document.addEventListener("DOMContentLoaded", function() {
+        // Alternative initialization
+        setTimeout(function() {
             var mainCard = document.querySelector(".gumilar-main-card");
             if (mainCard) {
-                mainCard.addEventListener("click", toggleDataList);
+                console.log("Card found, adding click listener");
+                mainCard.style.cursor = "pointer";
+                // Backup event listener in case onclick doesnt work
+                mainCard.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleGumilarData();
+                });
             }
-        });
+        }, 1000);
         ';
 
         return array(

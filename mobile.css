@@ -11,11 +11,15 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.3s ease;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  user-select: none;
 }
 
-.gumilar-main-card:hover {
+.gumilar-main-card:hover,
+.gumilar-main-card:active {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: rgba(25, 118, 210, 0.02);
 }
 
 /* Header layout (like course cards) */
@@ -23,6 +27,7 @@
   display: flex;
   align-items: center;
   padding: 8px 0;
+  pointer-events: none; /* Prevent child elements from interfering with click */
 }
 
 .gumilar-icon {
@@ -51,21 +56,16 @@
   margin-left: auto;
 }
 
-/* Data list container */
+/* Data list container with improved animations */
 .data-list-container {
-  animation: slideDown 0.3s ease-out;
   padding: 0 8px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  max-height: 0;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.data-list-container[style*="display: block"] {
+  max-height: 2000px;
 }
 
 /* Individual data item cards */
@@ -74,6 +74,32 @@
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   border-left: 4px solid #1976d2;
+  transform: translateY(10px);
+  opacity: 0;
+  animation: slideInItem 0.3s ease-out forwards;
+}
+
+.data-item-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.data-item-card:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.data-item-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.data-item-card:nth-child(4) {
+  animation-delay: 0.25s;
+}
+.data-item-card:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+@keyframes slideInItem {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .data-item-header {
@@ -112,6 +138,24 @@
 
 .data-item-status {
   margin-left: auto;
+}
+
+/* Debug indicator for testing */
+.gumilar-main-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  background: transparent;
+  pointer-events: none;
+  transition: background 0.2s ease;
+}
+
+.gumilar-main-card:active::before {
+  background: rgba(25, 118, 210, 0.1);
 }
 
 /* Responsive design */
