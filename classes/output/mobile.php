@@ -138,7 +138,7 @@ class mobile
             `;
             
             // Add header with back button and content  
-            var backButtonHTML = "<button onclick=\"closeGumilarModal()\" class=\"gumilar-back-btn\" style=\"display: flex; align-items: center; justify-content: center; padding: 8px 12px; background: #1976d2; color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 14px; margin-right: 12px; box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3); transition: all 0.2s ease;\"><span style=\"margin-right: 6px;\">&larr;</span> Kembali</button>";
+            var backButtonHTML = "<button type=\"button\" onclick=\"closeGumilarModal(); return false;\" class=\"gumilar-back-btn\" style=\"display: flex; align-items: center; justify-content: center; padding: 8px 12px; background: #1976d2; color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 14px; margin-right: 12px; box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3); transition: all 0.2s ease;\"><span style=\"margin-right: 6px;\">&larr;</span> Kembali</button>";
             
             overlay.innerHTML = 
                 "<div class=\"gumilar-modal-header\" style=\"position: sticky; top: 0; background: white; padding: 15px 20px; border-bottom: 1px solid #ddd; margin: -20px -20px 20px -20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);\">" +
@@ -147,7 +147,7 @@ class mobile
                             backButtonHTML +
                             "<h2 style=\"margin: 0; color: #333; font-size: 20px;\">Data Gumilar</h2>" +
                         "</div>" +
-                        "<button onclick=\"closeGumilarModal()\" style=\"width: 32px; height: 32px; padding: 0; background: #f5f5f5; border: 1px solid #ddd; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #666; transition: all 0.2s ease;\">" +
+                        "<button type=\"button\" onclick=\"closeGumilarModal(); return false;\" style=\"width: 32px; height: 32px; padding: 0; background: #f5f5f5; border: 1px solid #ddd; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #666; transition: all 0.2s ease;\">" +
                             "&times;" +
                         "</button>" +
                     "</div>" +
@@ -158,6 +158,30 @@ class mobile
                 "</div>";
             
             document.body.appendChild(overlay);
+            
+            // Add direct event listeners to buttons for better compatibility
+            setTimeout(function() {
+                var backBtn = overlay.querySelector(".gumilar-back-btn");
+                var closeBtn = overlay.querySelector("button[onclick*=\"closeGumilarModal\"]");
+                
+                if (backBtn) {
+                    console.log("Adding event listener to back button");
+                    backBtn.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closeGumilarModal();
+                    });
+                }
+                
+                if (closeBtn && closeBtn !== backBtn) {
+                    console.log("Adding event listener to close button");
+                    closeBtn.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closeGumilarModal();
+                    });
+                }
+            }, 100);
             
             // Add keyboard listener for ESC key
             document.addEventListener("keydown", handleKeyPress);
@@ -178,31 +202,62 @@ class mobile
         }
         
         function closeGumilarModal() {
-            console.log("Closing Gumilar modal"); // Debug log
-            var overlay = document.getElementById("gumilarOverlay");
-            if (overlay) {
-                // Add fade out animation before removing
-                overlay.style.opacity = "1";
-                overlay.style.transition = "opacity 0.3s ease";
-                overlay.style.opacity = "0";
+            console.log("closeGumilarModal() called"); // Debug log
+            
+            try {
+                var overlay = document.getElementById("gumilarOverlay");
+                console.log("Overlay found:", overlay); // Debug log
                 
-                setTimeout(function() {
+                if (overlay) {
+                    console.log("Removing overlay..."); // Debug log
+                    
+                    // Remove event listeners to prevent memory leaks
+                    document.removeEventListener("keydown", handleKeyPress);
+                    
+                    // Simple immediate removal for better compatibility
+                    overlay.style.display = "none";
+                    
+                    // Remove from DOM
                     if (overlay.parentNode) {
-                        overlay.remove();
+                        overlay.parentNode.removeChild(overlay);
+                        console.log("Overlay removed successfully"); // Debug log
                     }
-                }, 300);
+                } else {
+                    console.log("No overlay found to remove"); // Debug log
+                }
+            } catch (error) {
+                console.error("Error closing modal:", error); // Debug log
+                
+                // Fallback: try to remove all possible overlays
+                var overlays = document.querySelectorAll("#gumilarOverlay");
+                overlays.forEach(function(ol) {
+                    if (ol.parentNode) {
+                        ol.parentNode.removeChild(ol);
+                    }
+                });
             }
         }
         
         // Add keyboard support for closing modal
         function handleKeyPress(event) {
+            console.log("Key pressed:", event.key); // Debug log
             if (event.key === "Escape" || event.keyCode === 27) {
                 var overlay = document.getElementById("gumilarOverlay");
                 if (overlay) {
+                    console.log("ESC pressed, closing modal"); // Debug log
                     closeGumilarModal();
                 }
             }
         }
+        
+        // Global function to test closing modal
+        window.testCloseModal = function() {
+            console.log("Test close modal called");
+            closeGumilarModal();
+        };
+        
+        // Make closeGumilarModal globally accessible
+        window.closeGumilarModal = closeGumilarModal;
         
         // Initialize click handler
         setTimeout(function() {
